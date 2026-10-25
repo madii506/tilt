@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>tilt</title>
-<meta name="description" content="Hedge new pump.fun pairs with the memecoin you're already down on. One pot per pair, settled once on Solana.">
+<meta name="description" content="tilt is a StonkFun layer to hedge pump.fun memecoins. Hedge new pairs with the memecoin you're already down on. One pot per pair, settled once on Solana.">
 <meta property="og:title" content="tilt">
-<meta property="og:description" content="Hedge new pairs with the bag you're down on.">
+<meta property="og:description" content="A StonkFun layer to hedge pump.fun memecoins. Hedge new pairs with the bag you're down on.">
 <meta property="og:image" content="https://tilt-lime.vercel.app/assets/img/og.png">
 <meta property="og:url" content="https://tilt-lime.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/fav64.png">
 <link rel="apple-touch-icon" href="/assets/img/fav180.png">
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css?v=1">
+<link rel="stylesheet" href="/assets/css/site.css?v=2">
 <script>try { if (!/[?&]skip/.test(location.search) && !sessionStorage.getItem('tilt.seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro'); else document.documentElement.classList.add('boot'); } catch (e) {}</script>
 <script type="importmap">{ "imports": { "three": "/assets/js/vendor/three.module.min.js" } }</script>
 </head>
@@ -24,7 +24,6 @@
 <div class="glow" id="glow" aria-hidden="true"></div>
 
 <div id="intro" aria-hidden="true">
-  <div class="lb lb-t"></div><div class="lb lb-b"></div>
   <div class="cap" id="cap"></div>
   <button class="skip" id="skip" type="button">skip <span>›</span></button>
   <div class="ibar"><i id="ibar"></i></div>
@@ -34,7 +33,7 @@
 
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="tilt"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#f6eddc"/><g fill="#a3122b"><path d="M20 1.5a18.5 18.5 0 0 1 5 .7l-1.4 4.6a13.7 13.7 0 0 0-7.2 0L15 2.2a18.5 18.5 0 0 1 5-.7z"/><path d="M20 38.5a18.5 18.5 0 0 1-5-.7l1.4-4.6a13.7 13.7 0 0 0 7.2 0l1.4 4.6a18.5 18.5 0 0 1-5 .7z"/><path d="M1.5 20a18.5 18.5 0 0 1 .7-5l4.6 1.4a13.7 13.7 0 0 0 0 7.2L2.2 25a18.5 18.5 0 0 1-.7-5z"/><path d="M38.5 20a18.5 18.5 0 0 1-.7 5l-4.6-1.4a13.7 13.7 0 0 0 0-7.2l4.6-1.4a18.5 18.5 0 0 1 .7 5z"/></g><circle cx="20" cy="20" r="11.5" fill="#1e0a10"/><path d="M13 21.4c1.6-2.6 2.6-3.6 4-3.6 2.4 0 3.4 1.4 4.6 3.4 1.1 1.8 2 2.8 3.6 3.2" fill="none" stroke="#f6eddc" stroke-width="2.2" stroke-linecap="round"/><path d="M17 17.8c2.4 0 3.4 1.4 4.6 3.4 1.1 1.8 2 2.8 3.6 3.2V17.8z" fill="#d4ff3f"/><circle cx="25.4" cy="24.6" r="2" fill="#f6eddc"/></svg><span class="bt">tilt</span></a>
-  <nav class="links"><a href="#board">board</a><a href="#how">how it works</a><a href="#calc">the math</a><a href="#bags">your bags</a><a href="#rules">rules</a><a href="#faq">faq</a></nav>
+  <nav class="links"><a href="#board">board</a><a href="#layer">the layer</a><a href="#how">how it works</a><a href="#calc">the math</a><a href="#bags">your bags</a><a href="#faq">faq</a></nav>
   <a class="cta mag" href="#board">open the board</a>
 </header>
 
@@ -43,8 +42,9 @@
   <canvas id="table" aria-label="A poker chip spinning down on red felt under a lamp, next to stacks of chips"></canvas>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="hero-copy">
+    <a class="kick rise" href="#layer"><i></i>a StonkFun layer to hedge pump.fun memecoins</a>
     <h1 class="split" id="h1">Hedge new pairs with the bag you're down on.</h1>
-    <p class="lead rise">Put the memecoin you're losing on against fresh pump.fun launches. One pot per pair, settled once on Solana.</p>
+    <p class="lead rise"><span class="lx">tilt sits on StonkFun and hedges the pump.fun trenches. </span>Put the memecoin you're losing on against fresh pump.fun launches. One pot per pair, settled once on Solana.</p>
     <div class="row rise"><a class="btn mag" href="#board">open the board</a><a class="btn ghost mag" href="#how">how it works</a></div>
     <div class="pill rise" id="heroPill"><i class="dot"></i><span>reading the newest pump.fun pairs…</span></div>
   </div>
@@ -89,11 +89,31 @@
   </div>
 </section>
 
+<section class="sec" id="layer">
+  <div class="wrap">
+    <div class="sh"><span class="sn">02</span><span class="sl scr">the layer</span></div>
+    <h2 class="split">A StonkFun layer for <em>pump.fun</em> memecoins.</h2>
+    <p class="lede rv">StonkFun launches coins paired with anything. tilt sits on top of it as a hedge layer for the pump.fun trenches: the memecoin you're down on on one side, a fresh pump.fun pair on the other.</p>
+    <div class="layer-grid">
+      <div class="stack3d rv" id="stack3d" aria-hidden="true">
+        <div class="plate p1"><span class="pl-k mono">what you hedge</span><b>pump.fun memecoins</b><span class="pl-s mono">fresh pairs · the bag you're down on</span></div>
+        <div class="plate p2"><span class="pl-k mono">the hedge layer</span><b>tilt</b><span class="pl-s mono">one pot per pair · settled once</span></div>
+        <div class="plate p3"><span class="pl-k mono">the base layer</span><b>StonkFun</b><span class="pl-s mono">coins paired with anything · $TILT lives here</span></div>
+      </div>
+      <div class="layer-cards stg">
+        <div class="card lc"><span class="lc-n mono">base</span><h3>StonkFun</h3><p>A Solana launchpad where a coin can be paired with anything: stocks, currencies, other coins. It's the ground tilt is built on.</p><a class="lc-a mono" href="https://stonkfun.xyz" target="_blank" rel="noopener">stonkfun.xyz ↗</a></div>
+        <div class="card lc"><span class="lc-n mono">layer</span><h3>tilt</h3><p>The hedge on top. Every fresh pump.fun pair gets one pot with two sides, and your losing bag becomes your stake.</p><a class="lc-a mono" href="#how">how it works ↓</a></div>
+        <div class="card lc"><span class="lc-n mono">target</span><h3>pump.fun memecoins</h3><p>What you're hedging: the newest pairs in the trenches, read live on the board, and the bags that already bled on you.</p><a class="lc-a mono" href="#board">the board ↑</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec how" id="how">
   <div class="pin" id="pin">
     <div class="wrap pin-in">
       <div class="how-l">
-        <div class="sh"><span class="sn">02</span><span class="sl scr">how it works</span></div>
+        <div class="sh"><span class="sn">03</span><span class="sl scr">how it works</span></div>
         <h2 class="split">Your bag. A fresh pair. <em>One pot.</em></h2>
         <ol class="steps" id="steps">
           <li data-i="0"><b>01</b><div><h3>Pick the bag you're down on</h3><p>The memecoin that's been bleeding in your wallet. It stops being dead weight and becomes your stake.</p></div></li>
@@ -120,7 +140,7 @@
 
 <section class="sec" id="calc">
   <div class="wrap">
-    <div class="sh"><span class="sn">03</span><span class="sl scr">run the numbers</span></div>
+    <div class="sh"><span class="sn">04</span><span class="sl scr">run the numbers</span></div>
     <h2 class="split">What a pot <em>pays.</em></h2>
     <p class="lede rv">Move the sliders. This is the pot math, before fees, with example numbers you choose. Nothing here is a live pot.</p>
     <div class="calc card rv">
@@ -141,7 +161,7 @@
 
 <section class="sec" id="bags">
   <div class="wrap">
-    <div class="sh"><span class="sn">04</span><span class="sl scr">your bags</span></div>
+    <div class="sh"><span class="sn">05</span><span class="sl scr">your bags</span></div>
     <h2 class="split">Find the one that's <em>bleeding.</em></h2>
     <p class="lede rv">Connect a wallet or paste any address. We read what it holds right now and what it's worth. Read-only: nothing to sign.</p>
     <form class="bagform card rv" id="bagform" autocomplete="off">
@@ -156,7 +176,7 @@
 
 <section class="sec" id="rules">
   <div class="wrap">
-    <div class="sh"><span class="sn">05</span><span class="sl scr">rules</span></div>
+    <div class="sh"><span class="sn">06</span><span class="sl scr">rules</span></div>
     <h2 class="split">The pot, <em>plainly.</em></h2>
     <div class="two">
       <div class="card rules stg tilt3d">
@@ -182,14 +202,15 @@
 
 <section class="sec" id="faq">
   <div class="wrap narrow">
-    <div class="sh"><span class="sn">06</span><span class="sl scr">questions</span></div>
+    <div class="sh"><span class="sn">07</span><span class="sl scr">questions</span></div>
     <h2 class="split">Straight answers.</h2>
     <details open class="rv"><summary>What is tilt?</summary><p>A way to hedge fresh pump.fun pairs. Each pair gets one pot with two sides: HEDGE says it dumps, HOLD says it doesn't. You fund your side with the memecoin you're already down on.</p></details>
     <details class="rv"><summary>Do new pairs really dump?</summary><p>Check the board: it shows, live, how many of the newest pairs already trade below their first price. Judge for yourself.</p></details>
     <details class="rv"><summary>Why use the bag I'm down on?</summary><p>It's money you've already written off. tilt turns it into a position that pays if the pair you pick dumps.</p></details>
     <details class="rv"><summary>Where does the data come from?</summary><p>The board reads GeckoTerminal's feed of new pools on pump.fun. Bag check reads token accounts from a public Solana RPC and prices from Jupiter. Nothing on this site is made up.</p></details>
     <details class="rv"><summary>Can I hedge right now?</summary><p>Not yet. Pots need their program on mainnet first. The board and bag check are live today.</p></details>
-    <details class="rv"><summary>Is tilt part of pump.fun?</summary><p>No. tilt is independent and not affiliated with pump.fun.</p></details>
+    <details class="rv"><summary>What does "a StonkFun layer" mean?</summary><p>StonkFun is a Solana launchpad where coins can be paired with anything. tilt is built on top of it: StonkFun is the base layer, tilt adds the hedge for pump.fun memecoins, and $TILT launches on StonkFun.</p></details>
+    <details class="rv"><summary>Is tilt part of pump.fun or StonkFun?</summary><p>No. tilt is an independent layer built on StonkFun. It isn't affiliated with pump.fun or StonkFun.</p></details>
   </div>
 </section>
 
@@ -198,7 +219,7 @@
 <section class="end" id="end">
   <canvas id="rain" aria-hidden="true"></canvas>
   <div class="wrap"><h2 class="split">Everyone's on <em>tilt.</em></h2><p class="lede rv">Hedge the next pair with the bag you're down on.</p><a class="btn mag rv" href="#board">open the board</a></div>
-  <footer class="foot mono"><span>tilt · not affiliated with pump.fun</span><span>pots are bets, not advice</span></footer>
+  <footer class="foot mono"><span>tilt · a StonkFun layer · not affiliated with pump.fun or StonkFun</span><span>pots are bets, not advice</span></footer>
 </section>
 </main>
 
@@ -209,6 +230,6 @@
 <div class="scrim" id="scrim"></div>
 <div class="rollbar" aria-hidden="true"><div class="rb-track"></div><div class="rb-chip" id="rbChip"></div></div>
 
-<script type="module" src="/assets/js/app.js?v=1"></script>
+<script type="module" src="/assets/js/app.js?v=2"></script>
 </body>
 </html>
