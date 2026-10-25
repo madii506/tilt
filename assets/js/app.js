@@ -318,7 +318,7 @@ function tiltify(el) { if (!matchMedia('(pointer: fine)').matches || RM || el.da
   el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
     el.classList.add('tilting'); el.style.transform = `perspective(1100px) rotateX(${(.5 - py) * 5}deg) rotateY(${(px - .5) * 6}deg) translateZ(0)`; el.style.setProperty('--sx', px * 100 + '%'); el.style.setProperty('--sy', py * 100 + '%'); });
   el.addEventListener('pointerleave', () => { el.classList.remove('tilting'); el.style.transition = 'transform .8s cubic-bezier(.2,.8,.2,1)'; el.style.transform = ''; setTimeout(() => el.style.transition = '', 800); }); }
-$$('.tilt3d, .cr, .meter, .calc').forEach(tiltify);
+$$('.tilt3d, .cr, .meter, .calc, .lc').forEach(tiltify);
 new MutationObserver(() => $$('.bag').forEach(tiltify)).observe($('#bagres'), { childList: true });
 
 // FAQ: smooth open and close

@@ -73,7 +73,7 @@ export function createTable(canvas, { intro = true, mobile = false } = {}) {
     d.g.position.set(hit.x, 5.5, hit.z); d.tilt.rotation.z = d.a0; d.yaw.rotation.y = d.prec; DROPS.push(d);
   });
   const st = { jolt: 0, t: 0, intro, done: !intro, introStart: 0, started: false, mx: 0, my: 0, smx: 0, smy: 0, reel: 0, visible: true, onIntroEnd: null, onBeat: null, beat: -1, pulse: 0 };
-  const HERO = () => mobile ? [V(.9, 9.4, 15.5), V(2.0, -3.4, .4)] : [V(-2.2, 6.2, 12.6), V(1.2, .6, -.3)];
+  const HERO = () => mobile ? [V(.9, 9.4, 15.5), V(2.0, -4.3, .4)] : [V(-2.2, 6.2, 12.6), V(1.2, .6, -.3)];
   const TOP = () => mobile ? [V(1.1, 7.4, 4.2), V(1.0, 0, .9)] : [V(2.5, 6.6, 4.6), V(2.3, 0, .9)];
 
   function size() { const r = canvas.getBoundingClientRect(); R.setSize(r.width, r.height, false); cam.aspect = r.width / Math.max(1, r.height); cam.fov = cam.aspect < 1 ? 42 : 30; cam.updateProjectionMatrix(); }
