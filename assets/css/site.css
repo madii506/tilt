@@ -415,3 +415,6 @@ html.intro .hero-copy .kick, html.boot .hero-copy .kick { opacity: 0 !important;
 .lc-a:hover { color: var(--lime); border-color: var(--lime); }
 @media (max-width: 980px) { .layer-grid { grid-template-columns: 1fr; gap: 10px; } .stack3d { height: 380px; } .plate { height: 120px; padding: 16px 20px; } .plate b { font-size: 26px; } .p2 { top: 140px; } .p3 { top: 240px; } }
 @media (max-width: 560px) { .lead .lx { display: none; } .kick { font-size: 10.5px; margin-bottom: 14px; padding: 6px 11px 6px 8px; } }
+.tk-l { position: absolute; left: 0; top: 0; bottom: 0; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 0 18px 0 clamp(16px, 4vw, 44px); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--lime); background: linear-gradient(90deg, #120207 78%, rgba(18, 2, 7, 0)); padding-right: 40px; }
+.tk a.it { color: inherit; transition: background .3s; } .tk a.it:hover { background: rgba(246, 237, 220, .05); }
+@media (max-width: 560px) { .tk-l { font-size: 9.5px; padding-left: 12px; padding-right: 26px; } }
