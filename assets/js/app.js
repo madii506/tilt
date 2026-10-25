@@ -64,18 +64,17 @@ async function loadPairs() {
   } catch (e) { if (!DATA) failBoard(e.message); }
 }
 function failBoard(msg) {
-  $('#heroPill span').textContent = 'the pump.fun feed is not answering right now'; $('#mSrc').textContent = 'feed error: ' + msg;
+  $('#mSrc').textContent = 'feed error: ' + msg;
   $('#rows').innerHTML = `<div class="empty">The feed isn't answering right now (${esc(msg)}). It retries every 20 seconds.</div>`;
 }
 function renderAll() {
   const s = DATA.sample || {};
   if (s.downPct != null) {
-    $('#heroPill span').innerHTML = `<b>${s.downPct}%</b> of the last ${s.n} pump.fun pairs trade below their first price`;
     countTo($('#mPct'), s.downPct, { dur: FIRST ? 1800 : 900 });
     $('#mTxt').textContent = `of the last ${s.n} pump.fun pairs, launched in the past ${s.spanMin || 1} minutes, already trade below their first price.`;
   }
   $('#mSrc').textContent = (DATA.dev ? 'DEV FIXTURE · ' : '') + 'GeckoTerminal new pools · pump.fun only' + (DATA.stale ? ' · showing the last good read' : '');
-  renderHist(s.bins || []); renderRows(); renderTicker(); FIRST = false;
+  renderHist(s.bins || []); renderRows(); FIRST = false;
 }
 function renderHist(bins) {
   const el = $('#hist'), max = Math.max(1, ...bins.map(b => b.n));
@@ -107,13 +106,23 @@ $('#rows').innerHTML = Array.from({ length: 6 }, () => '<div class="skel"></div>
 setInterval(() => { if (!LAST_AT) return; const s = Math.round((Date.now() - LAST_AT) / 1000); $('#bAt').textContent = 'updated ' + (s < 5 ? 'just now' : s + 's ago') + ' · refreshes every 20s'; }, 1000);
 loadPairs(); setInterval(() => { if (!document.hidden) loadPairs(); }, 20000);
 
-// ticker: the newest pairs, drifting left forever
+// ticker: the StonkFun coins trading the most right now, drifting left forever
 let tkX = 0, tkW = 0, tkPause = false, tkBoost = 0;
-function renderTicker() {
-  const items = (DATA?.pairs || []).slice(0, 28); if (!items.length) return;
-  const one = items.map(p => `<span class="it">${avatar(p.img, p.name)}<b>$${esc(p.symbol || p.name)}</b><em class="${cls(p.chg)}">${pct(p.chg)}</em><small>${fmtAge(p.ageMin)}</small></span>`).join('');
+const SF_DIRECT = 'https://www.stonkfun.xyz/api/public/v1/tokens?sort=volume&pageSize=30';
+async function loadStonk() {
+  let coins = null;
+  try { const j = await (await fetch('/api/stonk', { cache: 'no-store' })).json(); if (j.ok && j.coins?.length) coins = j.coins; } catch (e) {}
+  if (!coins) try {   // our server can't reach StonkFun: read its public API straight from the browser (no icons then)
+    const j = await (await fetch(SF_DIRECT)).json();
+    coins = (j.data?.tokens || []).map(t => ({ mint: t.mint, name: t.name, symbol: t.symbol, quote: t.quote?.symbol, vol: t.market?.volume24hUsd, mcap: t.market?.marketCapUsd, icon: null, chg24: null }));
+  } catch (e) {}
+  if (coins?.length) renderTicker(coins);
+}
+function renderTicker(coins) {
+  const one = coins.slice(0, 30).map(c => `<a class="it" href="https://www.stonkfun.xyz/token/${encodeURIComponent(c.mint)}" target="_blank" rel="noopener">${avatar(c.icon, c.name || c.symbol)}<b>$${esc(c.symbol || c.name)}</b>${c.quote ? `<small>/${esc(c.quote)}</small>` : ''}${c.chg24 != null ? `<em class="${cls(c.chg24)}">${pct(c.chg24)}</em>` : ''}<small>vol ${fmtUsd(c.vol)}</small></a>`).join('');
   const tk = $('#tk'); tk.innerHTML = one + one; tkW = tk.scrollWidth / 2;
 }
+loadStonk(); setInterval(() => { if (!document.hidden) loadStonk(); }, 60000);
 $('#ticker').addEventListener('pointerenter', () => tkPause = true); $('#ticker').addEventListener('pointerleave', () => tkPause = false);
 (function spin() { if (tkW && !RM) { if (!tkPause) tkX -= .45 + tkBoost; if (-tkX >= tkW) tkX += tkW; $('#tk').style.transform = `translate3d(${tkX}px,0,0)`; } requestAnimationFrame(spin); })();
 
