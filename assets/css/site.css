@@ -46,17 +46,13 @@ em { font-style: normal; color: var(--lime); }
 /* intro */
 #intro { position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .8s, visibility 0s .8s; }
 html.intro #intro { opacity: 1; visibility: visible; transition: none; }
-html:not(.intro) .lb-t, html:not(.intro) .lb-b { transform: scaleY(0); }
 html.intro { overflow: hidden; }
 html.intro .nav { transform: translateY(-120%); opacity: 0; }
 html.intro .hero-copy .rise, html.intro .hero-foot, html.intro .ticker { opacity: 0 !important; transform: translateY(24px) !important; }
 html.intro .hero-shade { opacity: 0; }
 html.boot .nav { transform: translateY(-120%); opacity: 0; }
 html.boot .hero-copy .rise, html.boot .hero-foot, html.boot .ticker { opacity: 0 !important; transform: translateY(24px) !important; }
-#intro::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 34vh; background: linear-gradient(0deg, rgba(10, 1, 4, .72), rgba(10, 1, 4, 0)); }
 /* letterbox bars and the wordmark that lands, then flies into the nav */
-.lb { position: absolute; left: 0; right: 0; height: 9vh; background: #050102; z-index: 2; transition: transform 1.1s var(--ease); }
-.lb-t { top: 0; transform-origin: top; } .lb-b { bottom: 0; transform-origin: bottom; }
 .imark { position: fixed; left: 50%; top: 46%; z-index: 61; pointer-events: none; font: 800 clamp(110px, 21vw, 330px)/1 var(--display); letter-spacing: -.07em; color: var(--ink); white-space: nowrap; transform: translate(-50%, -50%); transform-origin: 0 0; text-shadow: 0 20px 60px rgba(0, 0, 0, .55); }
 .imark span { display: inline-block; opacity: 0; transform: translateY(-70vh) rotate(var(--r)); }
 .imark.on span { opacity: 1; transform: none; transition: transform 1s cubic-bezier(.34, 1.4, .5, 1), opacity .3s; transition-delay: calc(var(--i) * 110ms); }
@@ -389,3 +385,33 @@ h2.skew { will-change: transform; }
   .calc { grid-template-columns: 1fr; padding: 24px; gap: 28px; }
   .c-row { grid-template-columns: 1fr 90px; } .c-row span { grid-column: 1 / -1; } .c-row input { grid-column: 1; }
 }
+
+/* ── the StonkFun layer ── */
+.kick { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; padding: 7px 13px 7px 9px; border-radius: 999px; background: rgba(212, 255, 63, .08); border: 1px solid rgba(212, 255, 63, .3); font: 600 12px var(--mono); color: var(--lime); letter-spacing: .02em; transition: background .3s, opacity 1s var(--ease), transform 1s var(--ease); }
+.kick:hover { background: rgba(212, 255, 63, .16); }
+.kick i { width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle, #1e0a10 0 34%, transparent 35%), repeating-conic-gradient(var(--lime) 0 22.5deg, #1e0a10 22.5deg 45deg); box-shadow: 0 0 0 1.5px var(--lime); animation: spinr 6s linear infinite; }
+html.intro .hero-copy .kick, html.boot .hero-copy .kick { opacity: 0 !important; transform: translateY(24px) !important; }
+.layer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.stack3d { position: relative; height: 470px; perspective: 1400px; }
+.plate { position: absolute; left: 6%; right: 6%; height: 150px; border-radius: 22px; padding: 22px 26px; display: flex; flex-direction: column; justify-content: center; gap: 4px;
+  transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-34deg) translateZ(var(--z, 0px)); transition: transform 1.4s var(--ease), box-shadow 1.4s var(--ease); box-shadow: 0 40px 60px rgba(0, 0, 0, .45); }
+.plate b { font: 800 34px var(--display); letter-spacing: -.04em; }
+.pl-k { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+.pl-s { font-size: 12px; opacity: .75; }
+.p1 { top: 40px; --z: 0px; background: linear-gradient(135deg, #2b0c14, #3a0f1b); border: 1px solid var(--line2); color: var(--ink); }
+.p2 { top: 160px; --z: 0px; background: linear-gradient(135deg, #d4ff3f, #b9e626); color: #1e0a10; }
+.p3 { top: 280px; --z: 0px; background: linear-gradient(135deg, #f6eddc, #e6d8bf); color: #1e0a10; }
+.stack3d.in .p1 { --z: 60px; animation: floatp 6s ease-in-out 1.4s infinite; }
+.stack3d.in .p2 { --z: 20px; animation: floatp 6s ease-in-out 1.7s infinite; }
+.stack3d.in .p3 { --z: -20px; animation: floatp 6s ease-in-out 2s infinite; }
+.stack3d:hover .p1 { --z: 110px; } .stack3d:hover .p2 { --z: 40px; } .stack3d:hover .p3 { --z: -40px; }
+@keyframes floatp { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+.layer-cards { display: grid; gap: 12px; }
+.lc { position: relative; padding: 22px 24px; }
+.lc h3 { margin: 6px 0 6px; font: 800 22px var(--display); letter-spacing: -.03em; }
+.lc p { margin: 0 0 10px; color: var(--ink2); font-size: 14.5px; }
+.lc-n { font-size: 10.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--lime); }
+.lc-a { font-size: 12px; color: var(--ink2); border-bottom: 1px solid var(--line2); }
+.lc-a:hover { color: var(--lime); border-color: var(--lime); }
+@media (max-width: 980px) { .layer-grid { grid-template-columns: 1fr; gap: 10px; } .stack3d { height: 380px; } .plate { height: 120px; padding: 16px 20px; } .plate b { font-size: 26px; } .p2 { top: 140px; } .p3 { top: 240px; } }
+@media (max-width: 560px) { .lead .lx { display: none; } .kick { font-size: 10.5px; margin-bottom: 14px; padding: 6px 11px 6px 8px; } }
