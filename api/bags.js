@@ -1,7 +1,7 @@
 // GET /api/bags?owner=<wallet> — the memecoins a wallet holds right now, with what they're worth.
 // Read-only: token accounts from a public Solana RPC, names, icons and prices from Jupiter. No keys, nothing to sign.
 const RPCS = ['https://solana-rpc.publicnode.com', 'https://api.mainnet-beta.solana.com'];
-const PROGRAMS = ['TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA', 'TokenzQdBNbLqP5VEhdkAS6EPFLC1PE1Vh6BCX6s2q'];
+const PROGRAMS = ['TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA', 'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'];
 const SKIP = new Set(['So11111111111111111111111111111111111111112', 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB']);
 const B58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
 
@@ -21,7 +21,9 @@ module.exports = async (req, res) => {
   const owner = String(req.query.owner || '').trim();
   if (!B58.test(owner)) return res.status(400).json({ ok: false, reason: 'that is not a Solana wallet address' });
   try {
-    const [bal, ...lists] = await Promise.all([rpc('getBalance', [owner]), ...PROGRAMS.map(p => rpc('getTokenAccountsByOwner', [owner, { programId: p }, { encoding: 'jsonParsed' }]))]);
+    const [balR, ...listR] = await Promise.allSettled([rpc('getBalance', [owner]), ...PROGRAMS.map(p => rpc('getTokenAccountsByOwner', [owner, { programId: p }, { encoding: 'jsonParsed' }]))]);
+    if (listR.every(x => x.status === 'rejected')) throw listR[0].reason;   // one token program may fail; both failing is an error
+    const bal = balR.status === 'fulfilled' ? balR.value : null, lists = listR.filter(x => x.status === 'fulfilled').map(x => x.value);
     const held = new Map();
     for (const l of lists) for (const a of l.value || []) {
       const info = a.account?.data?.parsed?.info; if (!info) continue;
